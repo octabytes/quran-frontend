@@ -4,11 +4,14 @@ import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 
+import AppActions from "store/actions/app_actions";
+
 const LanguageMenu = () => {
   const [languageMenu, setLanguageMenu] = useState(null);
   const [language, setLanguage] = useState("English");
 
   const selectLanguage = (language) => {
+    AppActions.selectLanguage(language);
     setLanguage(language);
     setLanguageMenu(null);
   };
@@ -29,8 +32,8 @@ const LanguageMenu = () => {
         open={Boolean(languageMenu)}
         onClose={() => setLanguageMenu(null)}
       >
-        <MenuItem onClick={() => selectLanguage("English")}>English</MenuItem>
-        <MenuItem onClick={() => selectLanguage("Urdu")}>Urdu</MenuItem>
+        <MenuItem onClick={() => selectLanguage("english")}>English</MenuItem>
+        <MenuItem onClick={() => selectLanguage("urdu")}>Urdu</MenuItem>
       </Menu>
     </div>
   );

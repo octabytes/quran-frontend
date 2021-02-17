@@ -5,6 +5,7 @@ import MenuItem from "@material-ui/core/MenuItem";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 
 import surahList from "./surah_list";
+import AppActions from "store/actions/app_actions";
 
 const SurahMenu = () => {
   const [surahMenu, setSurahMenu] = useState(null);
@@ -13,6 +14,7 @@ const SurahMenu = () => {
   );
 
   const selectSurah = (surah) => {
+    AppActions.selectSurah(surah.number);
     setSurah(`${surah.number}. ${surah.english_name} ${surah.arabic_name}`);
     setSurahMenu(null);
   };

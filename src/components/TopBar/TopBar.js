@@ -5,7 +5,7 @@ import Typography from "@material-ui/core/Typography";
 import SurahMenu from "./SurahMenu";
 import LanguageMenu from "./LanguageMenu";
 
-export default function ButtonAppBar() {
+const TopBar = () => {
   return (
     <div style={{ flexGrow: 1 }}>
       <AppBar position="static">
@@ -18,4 +18,6 @@ export default function ButtonAppBar() {
       </AppBar>
     </div>
   );
-}
+};
+
+export default TopBar;
