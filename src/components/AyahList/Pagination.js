@@ -4,10 +4,32 @@ import ChevronRightIcon from "@material-ui/icons/ChevronRight";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 
 const Pagination = () => {
+  const search = window.location.search;
+  let offset = 0;
+  if (search.length) {
+    offset = parseInt(search.replace("?offset=", ""));
+  }
+
+  const goToNextPage = () => {
+    const startFrom = offset + 30;
+    window.location = window.location.origin + "/?offset=" + startFrom;
+  };
+
+  const goToPrevPage = () => {
+    const startFrom = offset - 30;
+    window.location = window.location.origin + "/?offset=" + startFrom;
+  };
+
   return (
     <div>
-      <Button startIcon={<ChevronLeftIcon />}>Previous</Button>
-      <Button endIcon={<ChevronRightIcon />}>Next</Button>
+      {offset > 0 && (
+        <Button onClick={goToPrevPage} startIcon={<ChevronLeftIcon />}>
+          Previous
+        </Button>
+      )}
+      <Button onClick={goToNextPage} endIcon={<ChevronRightIcon />}>
+        Next
+      </Button>
     </div>
   );
 };

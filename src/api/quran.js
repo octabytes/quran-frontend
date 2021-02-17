@@ -26,23 +26,12 @@ export const getAyahByNumber = async (number) => {
   }
 };
 
-export const getAyahListBySurah = async (number) => {
+export const getAyahListBySurah = async (number, offset) => {
   try {
-    const response = await API.get(`/surah/${number}`);
+    const response = await API.get(`/surah/${number}?offset=${offset}`);
     return response.data;
   } catch (e) {
     console.log("FAILED: unable to perform getAyahListBySurah API");
-    console.error(e);
-    return e.response && e.response.data;
-  }
-};
-
-export const getAyahListByCursor = async (cursor) => {
-  try {
-    const response = await API.get(`/ayah/surah/?cursor=${cursor}`);
-    return response.data;
-  } catch (e) {
-    console.log("FAILED: unable to perform getAyahListByCursor API");
     console.error(e);
     return e.response && e.response.data;
   }

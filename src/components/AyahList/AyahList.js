@@ -12,7 +12,13 @@ const AyahList = () => {
   const surah = useSelector((state) => state.quran[surahNumber]);
   const loadSurahData = async () => {
     if (!surah) {
-      const response = await getAyahListBySurah(surahNumber);
+      const search = window.location.search;
+      let offset = 0;
+      if (search.length) {
+        offset = parseInt(search.replace("?offset=", ""));
+      }
+
+      const response = await getAyahListBySurah(surahNumber, offset);
       if (!response.error) {
         QuranActions.loadSurahData(surahNumber, response.ayahs);
       } else {
