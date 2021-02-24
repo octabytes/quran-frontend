@@ -10,7 +10,12 @@ const Footer = () => {
       }}
     >
       <Toolbar>
-        <Typography>CopyRights</Typography>
+        <Typography>
+          CopyRights &copy; OctaByte.
+          <a href="https://github.com/octabytes/quran-frontend" target="_blank">
+            Code on GitHub
+          </a>
+        </Typography>
       </Toolbar>
     </div>
   );
