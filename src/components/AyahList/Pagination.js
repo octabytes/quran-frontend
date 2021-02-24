@@ -2,9 +2,11 @@ import React from "react";
 import Button from "@material-ui/core/Button";
 import ChevronRightIcon from "@material-ui/icons/ChevronRight";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
+import { useHistory } from "react-router-dom";
 
 const Pagination = () => {
-  const search = window.location.search;
+  const history = useHistory();
+  const search = history.location.search;
   let offset = 0;
   if (search.length) {
     offset = parseInt(search.replace("?offset=", ""));
@@ -12,12 +14,12 @@ const Pagination = () => {
 
   const goToNextPage = () => {
     const startFrom = offset + 30;
-    window.location = window.location.origin + "/?offset=" + startFrom;
+    history.push(`/?offset=${startFrom}`);
   };
 
   const goToPrevPage = () => {
     const startFrom = offset - 30;
-    window.location = window.location.origin + "/?offset=" + startFrom;
+    history.push(`/?offset=${startFrom}`);
   };
 
   return (

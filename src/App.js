@@ -1,10 +1,12 @@
 import React from "react";
 import { ThemeProvider, createMuiTheme } from "@material-ui/core/styles";
 import blue from "@material-ui/core/colors/blue";
+import { Router } from "react-router-dom";
+import { createBrowserHistory } from "history";
 
-import TopBar from "./components/TopBar";
-import AyahList from "./components/AyahList";
-import Footer from "./components/Footer";
+import Routes from "./Routes";
+
+const browserHistory = createBrowserHistory();
 
 const theme = createMuiTheme({
   palette: {
@@ -15,9 +17,9 @@ const theme = createMuiTheme({
 function App() {
   return (
     <ThemeProvider theme={theme}>
-      <TopBar />
-      <AyahList />
-      <Footer />
+      <Router history={browserHistory}>
+        <Routes />
+      </Router>
     </ThemeProvider>
   );
 }

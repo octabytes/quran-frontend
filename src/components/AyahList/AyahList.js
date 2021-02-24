@@ -1,26 +1,34 @@
 import React, { useEffect } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, shallowEqual } from "react-redux";
+import { withRouter } from "react-router-dom";
 
 import { getAyahListBySurah } from "api/quran";
 import QuranActions from "store/actions/quran_actions";
 import AyahItem from "./AyahItem";
 import Pagination from "./Pagination";
 
-const AyahList = () => {
+const AyahList = (props) => {
+  const search = props.location.search;
   const surahNumber = useSelector((state) => state.app.surah);
 
-  const surah = useSelector((state) => state.quran[surahNumber]);
+  let offset = 0;
+  if (search.length) {
+    offset = parseInt(search.replace("?offset=", ""));
+  }
+
+  const surah = useSelector((state) => {
+    if (state.quran[surahNumber]) {
+      return state.quran[surahNumber][offset];
+    }
+
+    return undefined;
+  });
+
   const loadSurahData = async () => {
     if (!surah) {
-      const search = window.location.search;
-      let offset = 0;
-      if (search.length) {
-        offset = parseInt(search.replace("?offset=", ""));
-      }
-
       const response = await getAyahListBySurah(surahNumber, offset);
       if (!response.error) {
-        QuranActions.loadSurahData(surahNumber, response.ayahs);
+        QuranActions.loadSurahData(surahNumber, offset, response.ayahs);
       } else {
         console.error(response.error.message);
       }
@@ -29,10 +37,14 @@ const AyahList = () => {
 
   useEffect(() => {
     loadSurahData();
-  }, [surahNumber]);
+  }, [surahNumber, search]);
 
   if (!surah) {
     return <h1>Loading...</h1>;
+  }
+
+  if (!surah.length) {
+    return <h1>Surah Complete, no more Ayahs</h1>;
   }
 
   return (
@@ -46,4 +58,4 @@ const AyahList = () => {
   );
 };
 
-export default AyahList;
+export default withRouter(AyahList);
