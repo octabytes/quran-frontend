@@ -1,7 +1,6 @@
 # [START runtime]
 runtime: nodejs10
 service: quran-frontend
-version: v1
 # [END runtime]
 
 # [START handlers]
