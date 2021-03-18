@@ -1,21 +1,28 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Button from "@material-ui/core/Button";
 import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
+import { useHistory } from "react-router-dom";
 
 import surahList from "./surah_list";
 import AppActions from "store/actions/app_actions";
 
-const SurahMenu = () => {
+const SurahMenu = ({ surahNumber }) => {
+  const history = useHistory();
   const [surahMenu, setSurahMenu] = useState(null);
   const [surah, setSurah] = useState(
-    `${surahList[0].number}. ${surahList[0].english_name} ${surahList[0].arabic_name}`
+    `${surahList[surahNumber].number}. ${surahList[surahNumber].english_name} ${surahList[surahNumber].arabic_name}`
   );
 
+  useEffect(() => {
+    setSurah(
+      `${surahList[surahNumber].number}. ${surahList[surahNumber].english_name} ${surahList[surahNumber].arabic_name}`
+    );
+  }, [surahNumber]);
+
   const selectSurah = (surah) => {
-    AppActions.selectSurah(surah.number);
-    setSurah(`${surah.number}. ${surah.english_name} ${surah.arabic_name}`);
+    history.push(`/${surah.number}`);
     setSurahMenu(null);
   };
 

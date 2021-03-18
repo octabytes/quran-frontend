@@ -5,7 +5,7 @@ import Typography from "@material-ui/core/Typography";
 import SurahMenu from "./SurahMenu";
 import LanguageMenu from "./LanguageMenu";
 
-const TopBar = () => {
+const TopBar = (props) => {
   return (
     <div style={{ flexGrow: 1 }}>
       <AppBar position="static">
@@ -13,7 +13,7 @@ const TopBar = () => {
           <Typography variant="h6">QURAN</Typography>
 
           <LanguageMenu />
-          <SurahMenu />
+          <SurahMenu surahNumber={props.surahNumber} />
         </Toolbar>
       </AppBar>
     </div>

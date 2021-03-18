@@ -9,7 +9,7 @@ import Pagination from "./Pagination";
 
 const AyahList = (props) => {
   const search = props.location.search;
-  const surahNumber = useSelector((state) => state.app.surah);
+  const surahNumber = props.match.params.surahNumber || 1;
 
   let offset = 0;
   if (search.length) {

@@ -3,7 +3,7 @@ import axios from "axios";
 let apiURL;
 
 if (!process.env.NODE_ENV || process.env.NODE_ENV === "development") {
-  apiURL = "http://localhost:5000/v1";
+  apiURL = "http://localhost:5001/v1";
 } else {
   apiURL = "https://quran-api-dot-islamicnet.appspot.com/v1";
 }

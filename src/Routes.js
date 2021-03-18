@@ -7,9 +7,11 @@ const Routes = () => {
   return (
     <BrowserRouter>
       <Switch>
-        <Route exact path="/">
-          <Home />
-        </Route>
+        <Route
+          exact
+          path="/:surahNumber?"
+          render={(routeProps) => <Home {...routeProps} />}
+        />
       </Switch>
     </BrowserRouter>
   );
